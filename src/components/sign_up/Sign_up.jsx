@@ -15,7 +15,7 @@ function Sign_up() {
                         <hr />
                         <div className='signup_inputs'>
                             <p>Email :</p>
-                            <input type="text" placeholder='Emai' required />
+                            <input type="email" placeholder='Emai' required />
                             <p>Password :</p>
                             <input type="text" placeholder='Password' required />
                             <div className="signup-condition">
@@ -26,7 +26,7 @@ function Sign_up() {
                         </div>
                     </div>
                     <div className="signup_right">
-                        <img src={assets.sign_up} alt="" />
+                        <img src={assets.test} alt="" />
                     </div>
                 </div>
 

@@ -9,7 +9,7 @@
     place-self: center;
     width: 60vw;
     height: 70vh;
-    background-color: #eccbea;
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
 
@@ -59,7 +59,7 @@
     border: 1px solid #c9c9c9;
     padding: 5px;
     border-radius: 4px ;
-}
+    }
 .signup-condition{
     display: flex;
     justify-content: space-between;
@@ -83,6 +83,6 @@
 }
 .signup_right img{
     width: 100%;
-    height: 100%;
+    height: 80%;
     border-radius: 0px 0px 20px 0px;
 }
