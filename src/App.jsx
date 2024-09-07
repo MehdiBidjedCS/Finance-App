@@ -1,14 +1,13 @@
-import './App.css'
-import Sign_up from './components/sign_up/Sign_up'
-
+import "./index.css";
+import Signup from "./components/sign_up/Signup";
+import Account from "./components/sign_up/Accountchois";
+import AddunlinkedAcount from "./components/sign_up/AddunlinkedAcount";
 function App() {
-
-
   return (
     <>
-      <Sign_up/>
+      <AddunlinkedAcount />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
