@@ -7,7 +7,7 @@ const AccountType = ({ Icon, title, description }) => {
         <h2 className="pl-2 font-semibold">{title}</h2>
       </div>
       <div>
-        <p className="text-sm mt-2 pl-8">{description}</p>
+        <p className="text-sm mt-2 pl-8 ">{description}</p>
       </div>
     </div>
   );

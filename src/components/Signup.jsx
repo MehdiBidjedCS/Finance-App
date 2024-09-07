@@ -4,7 +4,7 @@ import { assets } from "../assets/Asset.js";
 function Signup() {
   return (
     <div className="SignUp">
-      <form className="SignUpContainer">
+      <form className="SignUpContainer ">
         <div className="title">
           <b>Get Started</b>
         </div>
