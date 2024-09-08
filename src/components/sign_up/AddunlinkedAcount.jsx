@@ -9,6 +9,19 @@ import FormControl from '@mui/material/FormControl';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
+  // useState pour gérer la page actuelle
+
+
+const handleUnlinkedAccountSetting =() => {
+
+  setCurrentPage(2)
+
+ };
+ const handleCreateAccountSeccesfully =() => {
+  setCurrentPage(3)
+
+ };
+ 
 export  function BasicTextFields({type}) {
   return (
     <Box
@@ -90,7 +103,7 @@ export function MultipleSelectPlaceholder({ accountType, setAccountType }) {
   );
 }
 
-function AddunlinkedAcount() {
+function AddunlinkedAcount({currentPage,setCurrentPage}) {
   const [accountType, setAccountType] = useState(''); // Default empty
   const [nickname, setNickname] = useState('');
   const [balance, setBalance] = useState('');
@@ -111,7 +124,7 @@ function AddunlinkedAcount() {
     <div className="w-full h-full z-10 absolute grid">
       <div className="place-self-center w-[25vw] h-[90vh] flex flex-col justify-start items-center border-black border-2 rounded-[20px]">
         <div className="flex items-center justify-between w-full h-1/6 text-black rounded-[20px] p-5">
-          <IoIosArrowBack className="mr-4 w-5 h-5 text-purple-600 cursor-pointer" />
+          <IoIosArrowBack className="mr-4 w-5 h-5 text-purple-600 cursor-pointer" onClick={()=>setCurrentPage('add-account')} />
           <h2 className="text-xl font-semibold flex-grow text-center">Add Unlinked Account</h2>
           <FaTimes className="ml-4 w-5 h-5 text-purple-600 cursor-pointer" />
         </div>
