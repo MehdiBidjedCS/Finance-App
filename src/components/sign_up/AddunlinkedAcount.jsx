@@ -11,18 +11,7 @@ import TextField from '@mui/material/TextField';
 
   // useState pour gérer la page actuelle
 
-
-const handleUnlinkedAccountSetting =() => {
-
-  setCurrentPage(2)
-
- };
- const handleCreateAccountSeccesfully =() => {
-  setCurrentPage(3)
-
- };
- 
-export  function BasicTextFields({type}) {
+export  function BasicTextFields({type,value,onChange}) {
   return (
     <Box
       component="form"
@@ -30,7 +19,7 @@ export  function BasicTextFields({type}) {
       noValidate
       autoComplete="off"
     >
-      <TextField id="filled-basic" label={type} variant="filled" />
+      <TextField id="filled-basic" label={type} variant="filled" value={value} onChange={onChange} />
     </Box>
   );
 }   
@@ -136,17 +125,17 @@ function AddunlinkedAcount({currentPage,setCurrentPage}) {
           {/* inputs */}
           <label htmlFor="account-type" className="font-bold">Give it a nickname</label>
           
-          <BasicTextFields type="Nickname"/>
+          <BasicTextFields type="Nickname" value={nickname} onChange={(e)=>setNickname(e.target.value)}/>
           <label htmlFor="account-type" className="font-bold">What type of account are you adding?</label>
           <MultipleSelectPlaceholder accountType={accountType} setAccountType={setAccountType} />
           <label htmlFor="balance" className="font-bold">What is your current account balance?</label>
-          <BasicTextFields type="Account balance"/>
+          <BasicTextFields type="Account balance" value={balance} onChange={(e)=>setBalance(e.target.value)} />
         </div>
         <div className="w-full flex justify-center items-center h-1/5">
           {/* Change the color of the button based on isNextEnabled */}
           <button
-            className={`w-4/5 h-3/4 rounded-[15px] ${
-              isNextEnabled ? 'bg-green-900' : 'bg-gray-300'
+            className={`w-4/5 h-3/4 rounded-[15px] text-3xl ${
+              isNextEnabled ? 'bg-green-600 text-white' : 'bg-gray-300 text-gray-500'
             }`}
             disabled={!isNextEnabled} // Disable the button if not all info is filled
           >

@@ -7,15 +7,15 @@ import AddunlinkedAcount from "./AddunlinkedAcount";
 import AddlinkedAccount from "./AddlinkedAccount";
 // useState pour gérer la page actuelle
 
-const Account = () => {
+const Account = ({currentPage,setCurrentPage}) => {
   // useState pour gérer la page actuelle
-  const [currentPage, setCurrentPage] = useState('add-account');
-  // Gestion des transitions entre les pages
+ // const [currentPage, setCurrentPage] = useState('add-account');
+ /** // Gestion des transitions entre les pages
   const goToLinkedProcess = () => setCurrentPage('linked-process');
   const goToLinkedValidation = () => setCurrentPage('linked-validation');
   const goToUnlinkedProcess = () => setCurrentPage('unlinked-process');
   const goToUnlinkedValidation = () => setCurrentPage('unlinked-validation');
-  const goToMain = () => setCurrentPage('add-account');
+  const goToMain = () => setCurrentPage('add-account'); */
   const desc1 = "Connect to your bank and automatically import transactions.";
   const desc2 = "Start with your current balance and enter your own transactions.";
   const guideInfo = "More Info please click on";
@@ -35,7 +35,7 @@ const Account = () => {
         <div className="w-full bg-purple-200 h-28 pl-8 pt-4 rounded-lg">
           <div className="flex items-center">
             <IoCloudDownloadOutline className="w-6 h-6" />
-            <h2 className="pl-2 font-semibold cursor-pointer" onClick={goToLinkedProcess}  >Linked</h2>
+            <h2 className="pl-2 font-semibold cursor-pointer" onClick ={()=>setCurrentPage('linked-process')}  >Linked</h2>
           </div>
           <div>
             <p className="text-sm mt-2 pl-8">{desc1}</p>
@@ -52,7 +52,7 @@ const Account = () => {
         <div className="w-full bg-purple-200 h-28 pl-8 pt-4 rounded-lg">
           <div className="flex items-center">
             <MdLinkOff className="w-6 h-6" />
-            <h2 className="pl-2 font-semibold cursor-pointer" onClick={goToUnlinkedProcess}>Unlinked</h2>
+            <h2 className="pl-2 font-semibold cursor-pointer" onClick={()=>setCurrentPage('unlinked-process')}>Unlinked</h2>
           </div>
           <div>
             <p className="text-sm mt-2 pl-8">{desc2}</p>

@@ -6,7 +6,7 @@ import Validation from "./components/sign_up/Validation";
 function App() {
   return (
     <>
-      <Validation />
+      <Signup />
     </>
   );
 }
