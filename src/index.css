@@ -23,4 +23,8 @@
   
    ::-webkit-scrollbar-thumb:hover {
     background-color: #555;  /* Darker color on hover */
-  }  
+  } 
+
+*{
+    box-sizing: border-box;
+}

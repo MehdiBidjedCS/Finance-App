@@ -1,17 +1,29 @@
-import React from "react";
 import { FaTimes } from "react-icons/fa";
 import { FaCircleInfo } from "react-icons/fa6";
 import { IoCloudDownloadOutline } from "react-icons/io5";
 import { MdLinkOff } from "react-icons/md";
+import react, { useState } from "react";
+import AddunlinkedAcount from "./AddunlinkedAcount";
+import AddlinkedAccount from "./AddlinkedAccount";
+// useState pour gérer la page actuelle
 
-const Account = () => {
+const Account = ({currentPage,setCurrentPage}) => {
+  // useState pour gérer la page actuelle
+ // const [currentPage, setCurrentPage] = useState('add-account');
+ /** // Gestion des transitions entre les pages
+  const goToLinkedProcess = () => setCurrentPage('linked-process');
+  const goToLinkedValidation = () => setCurrentPage('linked-validation');
+  const goToUnlinkedProcess = () => setCurrentPage('unlinked-process');
+  const goToUnlinkedValidation = () => setCurrentPage('unlinked-validation');
+  const goToMain = () => setCurrentPage('add-account'); */
   const desc1 = "Connect to your bank and automatically import transactions.";
-  const desc2 =
-    "Start with your current balance and enter your own transactions.";
-    const guideInfo = "More Info please click on";
+  const desc2 = "Start with your current balance and enter your own transactions.";
+  const guideInfo = "More Info please click on";
   return (
+
     <div className="w-full h-full z-10 absolute grid">
-      <div className=" place-self-center w-[25vw] h-[90vh] flex flex-col justify-start items-center bg-gray-100 p-5 border-black rounded-[20px]">
+      {currentPage === "add-account"
+      &&<div className=" place-self-center w-[25vw] h-[90vh] flex flex-col justify-start items-center bg-gray-100 p-5 border-black rounded-[20px]">
         <div className="flex items-center justify-between w-full mb-6 gap-30 ">
           <h2 className="text-xl font-semibold flex-grow text-center ml-4">
             Add Account
@@ -23,7 +35,7 @@ const Account = () => {
         <div className="w-full bg-purple-200 h-28 pl-8 pt-4 rounded-lg">
           <div className="flex items-center">
             <IoCloudDownloadOutline className="w-6 h-6" />
-            <h2 className="pl-2 font-semibold">Linked</h2>
+            <h2 className="pl-2 font-semibold cursor-pointer" onClick ={()=>setCurrentPage('linked-process')}  >Linked</h2>
           </div>
           <div>
             <p className="text-sm mt-2 pl-8">{desc1}</p>
@@ -40,7 +52,7 @@ const Account = () => {
         <div className="w-full bg-purple-200 h-28 pl-8 pt-4 rounded-lg">
           <div className="flex items-center">
             <MdLinkOff className="w-6 h-6" />
-            <h2 className="pl-2 font-semibold">Unlinked</h2>
+            <h2 className="pl-2 font-semibold cursor-pointer" onClick={()=>setCurrentPage('unlinked-process')}>Unlinked</h2>
           </div>
           <div>
             <p className="text-sm mt-2 pl-8">{desc2}</p>
@@ -56,6 +68,13 @@ const Account = () => {
           </p>
         </div>
       </div>
+      }
+      {currentPage==='unlinked-process' &&
+      <AddunlinkedAcount currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+      }
+      {currentPage==='linked-process' &&
+      <AddlinkedAccount/>
+      }
     </div>
   );
 };
