@@ -5,6 +5,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { IoIosLogOut } from "react-icons/io";
 import { FaChartLine } from "react-icons/fa";
 import { BiCategory } from "react-icons/bi";
+import { IoMdHelpCircleOutline } from "react-icons/io";
 
 export const sideItems = [
   { title: "Dashbord", icon: <RxDashboard /> },
@@ -14,6 +15,10 @@ export const sideItems = [
   { title: "Category", icon: <BiCategory /> },
 ];
 
+export const additionalItems = [
+  { title: "Get help", icon: <IoMdHelpCircleOutline /> },
+  { title: "Settings", icon: <IoSettingsOutline /> },
+];
 export const myAccounts = [
   {
     title: "creditCard",
