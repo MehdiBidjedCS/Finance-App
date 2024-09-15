@@ -1,24 +1,26 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom"; // Import useLocation
 import { SiEthereum } from "react-icons/si";
 import { sideItems, additionalItems, myAccounts } from "./../../data/index";
-import { FaAngleLeft } from "react-icons/fa";
-import { FaCaretDown } from "react-icons/fa";
+import { FaAngleLeft, FaCaretDown } from "react-icons/fa";
+import Account from "../sign_up/Accountchoice";
+const Dashboard = () => {
+  const location = useLocation(); // Access the state passed during navigation
+  const { isOpen } = location.state || {}; // Destructure the state
 
-const Dashbord = () => {
   const [open, setOpen] = useState(true);
 
   return (
     <div
       className={`${
         open ? "w-56" : "w-12"
-      } flex flex-col relative h-screen  bg-red-300 duration-500 overflow-y-auto overflow-x-hidden`}
+      } flex flex-col relative h-screen bg-red-300 duration-500 overflow-y-auto overflow-x-hidden`}
     >
-      <div className="flex  justify-between mt-4 px-4 items-center w-full mb-4">
+      <div className="flex justify-between mt-4 px-4 items-center w-full mb-4">
         <FaAngleLeft
-          //   className=" left-48 top-16 "
           className={`${
             open ? "-right-5 w-6 h-6 mr-2" : "left-8 h-4 w-4 ml-2"
-          }   absolute cursor-pointer rounded-full bg-red-300 text-red-300 top-16 `}
+          } absolute cursor-pointer rounded-full bg-red-300 text-red-300 top-16 `}
           onClick={() => {
             setOpen(!open);
           }}
@@ -42,9 +44,9 @@ const Dashbord = () => {
       <div className="px-4">
         <h1 className="font-bold">My Accounts</h1>
         {myAccounts.map((account) => (
-          <div key={account.title} className=" mb-4">
+          <div key={account.title} className="mb-4">
             <div className="flex items-center">
-              <h3 className="font-semibold pr-4 ">{account.title}</h3>
+              <h3 className="font-semibold pr-4">{account.title}</h3>
               <FaCaretDown className="cursor-pointer" />
             </div>
             {account.children.map((child) => (
@@ -66,8 +68,10 @@ const Dashbord = () => {
           </div>
         ))}
       </div>
+      {isOpen && <Account />}
+      {console.log(isOpen)}
     </div>
   );
 };
 
-export default Dashbord;
+export default Dashboard;
