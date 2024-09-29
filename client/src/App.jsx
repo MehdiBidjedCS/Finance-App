@@ -1,13 +1,16 @@
-import { BrowserRouter } from "react-router-dom";
-import { Route, Routes } from "react-router-dom";
 import LandPage from "./pages/LandPage";
+import Signup from "./pages/Signup";
 import "./index.css";
+import { Route, BrowserRouter, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <>
-      <LandPage />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandPage />} />
+        <Route path="/login" element={<Signup />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -1,70 +1,76 @@
-import React, { useEffect, useState } from "react";
-import { assets } from "../../assets/Asset.js";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { assets } from "../assets/Asset.js";
+import { useDispatch, useSelector } from "react-redux";
+import { is_Authentificated } from "./../redux/reducers/authSlicer.js";
+import { login } from "../redux/api/authApi.js";
 
 function Signup() {
+  const dispatch = useDispatch();
+  const isAuthentificated = useSelector(
+    (state) => state.auth.is_Authentificated
+  );
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const [isSubmit, setisSubmit] = useState(false);
 
-  useEffect(() => {
-    AbortController();
-    console.log("");
-  });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const handleSubmit = () => {
-    setisSubmit(true);
+    const credentials = { email, password };
+
+    const { error, data } = await login(credentials); // Pass the dispatch to update the Redux store
+
+    if (!error) {
+      console.log("Logged in successfully:", data);
+      // Optionally redirect or show success message
+    } else {
+      console.error("Login failed:", error);
+    }
   };
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
   return (
-    <div className="w-full h-full z-10 absolute grid">
-      <form className="place-self-center w-[60vw] h-[70vh] bg-white flex flex-col border border-black rounded-[20px]">
-        <div className="w-full h-[14%] bg-white rounded-t-[20px] flex justify-start items-center">
-          <b className="p-5 ml-2 text-[25px]">Get Started</b>
-        </div>
-        <div className="w-full h-full rounded-b-[20px] flex justify-around items-center">
-          <div className="mt-[60px] ml-[50px] w-[60%] h-full flex flex-col items-start gap-[10px]">
-            <p>Welcome to our app, Let's create your account :</p>
-            <hr />
-            <div className="flex flex-col items-start gap-[10px]">
-              <p>Email :</p>
-              <input
-                className="outline-none border border-[#c9c9c9] p-[5px] rounded-[4px]"
-                type="text"
-                placeholder="Emai"
-                required
-              />
-              <p>Password :</p>
-              <input
-                className="outline-none border border-[#c9c9c9] p-[5px] rounded-[4px]"
-                type="text"
-                placeholder="Password"
-                required
-              />
-              <div className="flex justify-between gap-[10px] p-[5px]">
-                <input
-                  className="outline-none border border-[#c9c9c9]  rounded-[4px]"
-                  type="checkbox"
-                  required
-                />
-                <p>
-                  by continuing , I agree to the terms of use & privacy policy.
-                </p>
-              </div>
-              <button
-                className="border-none w-[100px] p-[10px] text-center rounded-[4px] text-white bg-purple-600 text-[15px] cursor-pointer"
-                onClick={handleSubmit}
-              >
-                Sign Up
-              </button>
-            </div>
+    <div className="flex items-center  min-h-screen m-4">
+      <div className="flex  w-full md:w-1/2 bg-white border-black rounded-[20px] p-4 mx-auto justify-center">
+        <form className="flex flex-col mr-4" onSubmit={handleSubmit}>
+          <div className="w-full bg-white rounded-t-[20px] flex justify-start items-center">
+            <b className="p-5 ml-2 text-3xl">Get Started</b>
           </div>
-          <div className="h-full">
-            <img
-              className="w-full h-[80%] rounded-b-[20px]"
-              src={assets.sign_up}
-              alt=""
-            />
-          </div>
+          <p className="text-sm">
+            Welcome to our app, Let's create your account:
+          </p>
+          <input
+            name="email"
+            placeholder="email"
+            type="email"
+            className="outline-none hover:outline-blue-400 rounded-xl p-2 my-4"
+            required
+            onChange={handleEmail}
+          />
+          <input
+            name="password"
+            placeholder="password"
+            type="password"
+            className="outline-none hover:outline-blue-400 rounded-xl p-2"
+            required
+            onChange={handlePassword}
+          />
+          <button type="submit" className="mt-4 bg-blue-500 rounded-xl p-2">
+            Sign In
+          </button>
+        </form>
+        <div>
+          <img src={assets.sign_up} alt="Sign Up" />
         </div>
-      </form>
+      </div>
     </div>
   );
 }
