@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { FaCreditCard, FaCalendarAlt } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
-const CreditCardForm = () => {
+const CreditCardForm = ({ onClose, onComplete }) => {
   const [formData, setFormData] = useState({
     name: "",
     cardNumber: "",
@@ -59,6 +60,7 @@ const CreditCardForm = () => {
     const validationErrors = validate();
     if (Object.keys(validationErrors).length === 0) {
       console.log("Payment successful:", formData);
+      onComplete();
     } else {
       setErrors(validationErrors);
     }
@@ -80,11 +82,17 @@ const CreditCardForm = () => {
   };
 
   return (
-    <div className="bg-gray-100 p-8 rounded-lg max-w-md mx-auto mt-16">
-      <IoIosArrowBack />
-      <h2 className="text-xl font-semibold mb-6 text-center">
-        Credit Card Payment
-      </h2>
+    <div className="bg-gray-100 p-8 rounded-lg max-w-md mx-auto mt-16 flex flex-col items-center ">
+      <div className="flex  justify-aroud items-center space-x-16 hover:cursor-pointer">
+        <IoIosArrowBack
+          className="mb-6 font-bold"
+          size={20}
+          onClick={onClose}
+        />
+        <h2 className="text-xl font-semibold mb-6 text-center">
+          Credit Card Payment
+        </h2>
+      </div>
       <form onSubmit={handleSubmit}>
         {/* Cardholder Name */}
         <div className="mb-4">

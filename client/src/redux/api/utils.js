@@ -7,10 +7,10 @@ export const API = axios.create({
 export const handleApiError = async (error) => {
   try {
     const errorMessage =
-      error.response?.data?.message || "An unexpected error occurred.";
+      Object.values(error.response.data)[0] || "An unexpected error occurred.";
     const data = null;
     return { error: errorMessage, data };
   } catch (err) {
     throw new Error("An unexpected error occurred.");
   }
-};
+}

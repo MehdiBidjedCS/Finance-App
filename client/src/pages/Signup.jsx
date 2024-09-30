@@ -3,29 +3,35 @@ import { assets } from "../assets/Asset.js";
 import { useDispatch, useSelector } from "react-redux";
 import { is_Authentificated } from "./../redux/reducers/authSlicer.js";
 import { login } from "../redux/api/authApi.js";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const isAuthentificated = useSelector(
-    (state) => state.auth.is_Authentificated
-  );
+  const isAuth = useSelector((state) => state.auth.is_Authentificated);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const [isSubmit, setisSubmit] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(""); // State for error message
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const credentials = { email, password };
+    const credentials = {
+      username: email,
+      password: password,
+    };
 
-    const { error, data } = await login(credentials); // Pass the dispatch to update the Redux store
+    const response = await login(credentials);
 
-    if (!error) {
-      console.log("Logged in successfully:", data);
-      // Optionally redirect or show success message
+    if (response?.status === 200) {
+      dispatch(is_Authentificated());
+      console.log(isAuth);
+      setErrorMessage(""); // Clear error if login successful
+      navigate("/home");
     } else {
-      console.error("Login failed:", error);
+      // Set the backend error message in the state
+      console.log(response);
+      setErrorMessage(response.error || "An unknown error occurred.");
     }
   };
 
@@ -38,8 +44,8 @@ function Signup() {
   };
 
   return (
-    <div className="flex items-center  min-h-screen m-4">
-      <div className="flex  w-full md:w-1/2 bg-white border-black rounded-[20px] p-4 mx-auto justify-center">
+    <div className="flex items-center min-h-screen m-4">
+      <div className="flex w-full md:w-1/2 bg-white border-black rounded-[20px] p-4 mx-auto justify-center">
         <form className="flex flex-col mr-4" onSubmit={handleSubmit}>
           <div className="w-full bg-white rounded-t-[20px] flex justify-start items-center">
             <b className="p-5 ml-2 text-3xl">Get Started</b>
@@ -47,21 +53,24 @@ function Signup() {
           <p className="text-sm">
             Welcome to our app, Let's create your account:
           </p>
+          {errorMessage && <p className="text-red-500">{errorMessage}</p>}{" "}
+          {/* Display backend error */}
           <input
             name="email"
             placeholder="email"
-            type="email"
+            value={email} // Bind value to email state
             className="outline-none hover:outline-blue-400 rounded-xl p-2 my-4"
             required
-            onChange={handleEmail}
+            onChange={handleEmail} // Update state on change
           />
           <input
             name="password"
             placeholder="password"
+            value={password} // Bind value to password state
             type="password"
             className="outline-none hover:outline-blue-400 rounded-xl p-2"
             required
-            onChange={handlePassword}
+            onChange={handlePassword} // Update state on change
           />
           <button type="submit" className="mt-4 bg-blue-500 rounded-xl p-2">
             Sign In

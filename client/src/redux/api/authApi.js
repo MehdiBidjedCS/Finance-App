@@ -11,14 +11,13 @@ export const signup = async (credential) => {
 
 export const login = async (credential) => {
   try {
-    const response = await API.post("/api/token", credential, {
+    const response = await API.post("/api/token/", credential, {
       headers: {
         "Content-Type": "application/json",
       },
     });
-    console.log(response, error);
-    return { error: null, data: response };
+    return { data: response.data, status: response.status, error: null };
   } catch (err) {
-    handleApiError(err);
+    return handleApiError(err);
   }
 };

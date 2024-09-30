@@ -7,6 +7,7 @@ import { FaChartLine } from "react-icons/fa";
 import { BiCategory } from "react-icons/bi";
 import { IoMdHelpCircleOutline } from "react-icons/io";
 
+
 export const sideItems = [
   { title: "Dashbord", icon: <RxDashboard /> },
   { title: "Transactions", icon: <GrTransaction /> },
@@ -23,8 +24,8 @@ export const myAccounts = [
   {
     title: "creditCard",
     children: [
-      { name: "credit card", amount: 3000 },
-      { name: "credit card", amount: 2000 },
+      { name: "credit card1", amount: 3000 },
+      { name: "credit card2", amount: 2000 },
     ],
   },
   {

@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom"; // Import useLocation
 import { SiEthereum } from "react-icons/si";
 import { sideItems, additionalItems, myAccounts } from "./../../data/index";
 import { FaAngleLeft, FaCaretDown } from "react-icons/fa";
-import Account from "../sign_up/Accountchoice";
+import Account from "../account/Accountchoice";
 const Dashboard = () => {
   const location = useLocation(); // Access the state passed during navigation
   const { isOpen } = location.state || {}; // Destructure the state
@@ -14,18 +14,18 @@ const Dashboard = () => {
     <div
       className={`${
         open ? "w-56" : "w-12"
-      } flex flex-col relative h-screen bg-red-300 duration-500 overflow-y-auto overflow-x-hidden`}
+      } flex flex-col relative h-screen bg-slate-700 duration-500 overflow-y-auto overflow-x-hidden text-gray-300`}
     >
-      <div className="flex justify-between mt-4 px-4 items-center w-full mb-4">
+      <div className="flex justify-between mt-4 px-1 items-center w-full mb-4">
         <FaAngleLeft
           className={`${
-            open ? "-right-5 w-6 h-6 mr-2" : "left-8 h-4 w-4 ml-2"
-          } absolute cursor-pointer rounded-full bg-red-300 text-red-300 top-16 `}
+            open ? "-right-5 w-6 h-6 mr-2" : "left-8 h-6 w-6"
+          } absolute cursor-pointer rounded-full bg-slate-700 text-red-300 top-16 `}
           onClick={() => {
             setOpen(!open);
           }}
         />
-        <SiEthereum className="w-4 h-4" />
+        <SiEthereum className="w-6 h-6" />
         {open && <h2 className="mr-16">Financini</h2>}
       </div>
 
@@ -33,7 +33,9 @@ const Dashboard = () => {
       {sideItems.map((item) => (
         <div
           key={item.title}
-          className="flex items-center py-2 px-4 hover:bg-blue-100 cursor-pointer"
+          className={`${
+            open && "flex justify-center"
+          }flex items-center py-2 px-1  hover:bg-blue-100 cursor-pointer`}
         >
           {item.icon}
           {open && <p className="pl-4">{item.title}</p>}
@@ -69,7 +71,6 @@ const Dashboard = () => {
         ))}
       </div>
       {isOpen && <Account />}
-      {console.log(isOpen)}
     </div>
   );
 };

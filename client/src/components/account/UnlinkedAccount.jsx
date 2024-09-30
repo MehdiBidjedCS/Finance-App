@@ -9,7 +9,6 @@ import FormControl from '@mui/material/FormControl';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-  // useState pour gérer la page actuelle
 
 export  function BasicTextFields({type,value,onChange}) {
   return (
@@ -92,29 +91,35 @@ export function MultipleSelectPlaceholder({ accountType, setAccountType }) {
   );
 }
 
-function AddunlinkedAcount({currentPage,setCurrentPage}) {
-  const [accountType, setAccountType] = useState(''); // Default empty
-  const [nickname, setNickname] = useState('');
-  const [balance, setBalance] = useState('');
+function AddunlinkedAcount({ onClose }) {
+  const [accountType, setAccountType] = useState(""); // Default empty
+  const [nickname, setNickname] = useState("");
+  const [balance, setBalance] = useState("");
   const [isNextEnabled, setIsNextEnabled] = useState(false); // State for button color
 
   useEffect(() => {
     // If all fields are filled, enable the button and change its color
-    if (nickname !== '' && accountType !== '' && balance !== '') {
+    if (nickname !== "" && accountType !== "" && balance !== "") {
       setIsNextEnabled(true);
     } else {
       setIsNextEnabled(false);
     }
   }, [nickname, accountType, balance]);
 
-  const text = "got it! And don't worry --if you change your mind, you can link your account at any time.";
+  const text =
+    "got it! And don't worry --if you change your mind, you can link your account at any time.";
 
   return (
     <div className="w-full h-full z-10 absolute grid">
-      <div className="place-self-center w-[25vw] h-[90vh] flex flex-col justify-start items-center border-black border-2 rounded-[20px]">
+      <div className="place-self-center w-[25vw] h-[90vh] flex flex-col justify-start items-center border-black border-2 rounded-[20px] bg-gray-100">
         <div className="flex items-center justify-between w-full h-1/6 text-black rounded-[20px] p-5">
-          <IoIosArrowBack className="mr-4 w-5 h-5 text-purple-600 cursor-pointer" onClick={()=>setCurrentPage('add-account')} />
-          <h2 className="text-xl font-semibold flex-grow text-center">Add Unlinked Account</h2>
+          <IoIosArrowBack
+            className="mr-4 w-5 h-5 text-purple-600 cursor-pointer"
+            onClick={onClose}
+          />
+          <h2 className="text-xl font-semibold flex-grow text-center">
+            Add Unlinked Account
+          </h2>
           <FaTimes className="ml-4 w-5 h-5 text-purple-600 cursor-pointer" />
         </div>
         <div className="w-full p-2 text-sm align-center">
@@ -123,19 +128,38 @@ function AddunlinkedAcount({currentPage,setCurrentPage}) {
         </div>
         <div className="flex flex-col items-start w-full gap-[10px] ml-5">
           {/* inputs */}
-          <label htmlFor="account-type" className="font-bold">Give it a nickname</label>
-          
-          <BasicTextFields type="Nickname" value={nickname} onChange={(e)=>setNickname(e.target.value)}/>
-          <label htmlFor="account-type" className="font-bold">What type of account are you adding?</label>
-          <MultipleSelectPlaceholder accountType={accountType} setAccountType={setAccountType} />
-          <label htmlFor="balance" className="font-bold">What is your current account balance?</label>
-          <BasicTextFields type="Account balance" value={balance} onChange={(e)=>setBalance(e.target.value)} />
+          <label htmlFor="account-type" className="font-bold">
+            Give it a nickname
+          </label>
+
+          <BasicTextFields
+            type="Nickname"
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
+          />
+          <label htmlFor="account-type" className="font-bold">
+            What type of account are you adding?
+          </label>
+          <MultipleSelectPlaceholder
+            accountType={accountType}
+            setAccountType={setAccountType}
+          />
+          <label htmlFor="balance" className="font-bold">
+            What is your current account balance?
+          </label>
+          <BasicTextFields
+            type="Account balance"
+            value={balance}
+            onChange={(e) => setBalance(e.target.value)}
+          />
         </div>
         <div className="w-full flex justify-center items-center h-1/5">
           {/* Change the color of the button based on isNextEnabled */}
           <button
             className={`w-4/5 h-3/4 rounded-[15px] text-3xl ${
-              isNextEnabled ? 'bg-green-600 text-white' : 'bg-gray-300 text-gray-500'
+              isNextEnabled
+                ? "bg-green-600 text-white"
+                : "bg-gray-300 text-gray-500"
             }`}
             disabled={!isNextEnabled} // Disable the button if not all info is filled
           >
