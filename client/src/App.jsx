@@ -10,7 +10,8 @@ function App() {
       <Routes>
         <Route path="/" element={<LandPage />} />
         <Route path="/login" element={<Signup />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/home/*" element={<Home />} />
+    
       </Routes>
     </BrowserRouter>
   );

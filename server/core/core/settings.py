@@ -139,3 +139,4 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # React app URL (update if deployed elsewhere)
 ]
 APPEND_SLASH=False
+CORS_ALLOW_ALL_ORIGINS = True
